@@ -5,9 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+    <div id="rain-container"></div>
+    <style>
+        .rain {
+            position: absolute;
+            height: 7px;
+            width: 2px;
+            background: linear-gradient(45deg, #740000, #555);
+        }
+        #rain-container {
+          width: 100px;
+        }
+        body {
+            overflow: hidden;
+        }
+    </style>
+    <script>
+        var rain_speed = 1;
+        for (var i = 0; i < 100; i++)
+            $("#rain-container").append("<div class=\"rain\"></div>");
+
+        $(".rain").each(function (i) {
+            var e = $(this);
+            e.css("left", Math.floor(Math.random() * window.innerWidth));
+            e.css("top", Math.floor(Math.random() * window.innerHeight));
+        });
+
+        setInterval(() => {
+            $(".rain").each(function (i) {
+                var e = $(this);
+                var top = parseInt(e.css("top").replace("px", ""))
+                top += rain_speed;
+                if (top > window.innerHeight)
+                    top = 0;
+                e.css("top", top);
+            });
+        }, 10);
+    </script>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>

@@ -17,3 +17,6 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+<router-link to="/">Home</router-link> |
+<router-link to="/about">About</router-link>
